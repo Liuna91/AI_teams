@@ -7,72 +7,72 @@ router = APIRouter(prefix="/agents", tags=["Agents"])
 AGENTS = [
     AgentInfo(
         id="iris",
-        name="Ğ¡ÑĞ",
-        role="Éî¶ÈÑĞ¾¿Ô±",
-        description="Í¨¹ıÉî¶Èµ÷ÑĞ·¢ÏÖÕæÊµĞèÇóºÍÊĞ³¡»ú»á",
+        name="å°ç ”",
+        role="æ·±åº¦ç ”ç©¶å‘˜",
+        description="é€šè¿‡æ·±åº¦è°ƒç ”å‘ç°çœŸå®éœ€æ±‚å’Œå¸‚åœºæœºä¼š",
         status="online",
         capabilities=["market_research", "competitor_analysis", "trend_spotting"],
         icon="Search"
     ),
     AgentInfo(
         id="bob",
-        name="°¢¹¹",
-        role="ÏµÍ³¼Ü¹¹Ê¦",
-        description="Éè¼ÆÏµÍ³À¶Í¼£¬È·±£Ó¦ÓÃ¿ÉÀ©Õ¹¡¢¸ß¿ÉÓÃ",
+        name="é˜¿æ„",
+        role="ç³»ç»Ÿæ¶æ„å¸ˆ",
+        description="è®¾è®¡ç³»ç»Ÿè“å›¾ï¼Œç¡®ä¿åº”ç”¨å¯æ‰©å±•ã€é«˜å¯ç”¨",
         status="online",
         capabilities=["system_design", "tech_selection", "database_design"],
         icon="Cpu"
     ),
     AgentInfo(
         id="emma",
-        name="Ğ¡²ú",
-        role="²úÆ·¾­Àí",
-        description="½«Ïë·¨×ª»¯ÎªÇåÎúµÄ²úÆ·¶¨ÒåºÍ·¶Î§",
+        name="å°äº§",
+        role="äº§å“ç»ç†",
+        description="å°†æƒ³æ³•è½¬åŒ–ä¸ºæ¸…æ™°çš„äº§å“å®šä¹‰å’ŒèŒƒå›´",
         status="online",
         capabilities=["prd_writing", "user_story", "scope_management"],
         icon="PenTool"
     ),
     AgentInfo(
         id="mike",
-        name="ÀÏ¹Ü",
-        role="ÍÅ¶Ó¸ºÔğÈË",
-        description="¶Ëµ½¶ËĞ­µ÷ AI ´úÀí£¬°Ñ¿Ø½ø¶È²¢ÇëÇóÈ·ÈÏ",
+        name="è€ç®¡",
+        role="å›¢é˜Ÿè´Ÿè´£äºº",
+        description="ç«¯åˆ°ç«¯åè°ƒ AI ä»£ç†ï¼ŒæŠŠæ§è¿›åº¦å¹¶è¯·æ±‚ç¡®è®¤",
         status="online",
         capabilities=["project_management", "coordination", "reporting"],
         icon="Users"
     ),
     AgentInfo(
         id="sarah",
-        name="Ğ¡ÓÅ",
-        role="SEO ×¨¼Ò",
-        description="×Ô¶¯Éú³É SEO Ò³Ãæ£¬Çı¶¯×ÔÈ»Á÷Á¿Ôö³¤",
+        name="å°ä¼˜",
+        role="SEO ä¸“å®¶",
+        description="è‡ªåŠ¨ç”Ÿæˆ SEO é¡µé¢ï¼Œé©±åŠ¨è‡ªç„¶æµé‡å¢é•¿",
         status="online",
         capabilities=["seo_optimization", "content_strategy", "ranking"],
         icon="Globe"
     ),
     AgentInfo(
         id="alex",
-        name="°¢¹¤",
-        role="È«Õ»¹¤³ÌÊ¦",
-        description="¹¹½¨Éú²ú¼¶È«Õ»Ó¦ÓÃ£¬Ç°ºó¶ËÒ»Ìå»¯½»¸¶",
+        name="é˜¿å·¥",
+        role="å…¨æ ˆå·¥ç¨‹å¸ˆ",
+        description="æ„å»ºç”Ÿäº§çº§å…¨æ ˆåº”ç”¨ï¼Œå‰åç«¯ä¸€ä½“åŒ–äº¤ä»˜",
         status="online",
         capabilities=["frontend", "backend", "deployment", "integration"],
         icon="Code2"
     ),
     AgentInfo(
         id="adrian",
-        name="Ğ¡¹ã",
-        role="¹ã¸æ×¨Ô±",
-        description="×Ô¶¯Í¶·ÅºÍÓÅ»¯¹ã¸æ£¬½µµÍ»ñ¿Í³É±¾",
+        name="å°å¹¿",
+        role="å¹¿å‘Šä¸“å‘˜",
+        description="è‡ªåŠ¨æŠ•æ”¾å’Œä¼˜åŒ–å¹¿å‘Šï¼Œé™ä½è·å®¢æˆæœ¬",
         status="online",
         capabilities=["google_ads", "campaign_management", "optimization"],
         icon="Megaphone"
     ),
     AgentInfo(
         id="david",
-        name="Ğ¡Êı",
-        role="Êı¾İ·ÖÎöÊ¦",
-        description="·ÖÎöº£Á¿Êı¾İ£¬·¢ÏÖÓªÏú»ú»áºÍ¶´²ì",
+        name="å°æ•°",
+        role="æ•°æ®åˆ†æå¸ˆ",
+        description="åˆ†ææµ·é‡æ•°æ®ï¼Œå‘ç°è¥é”€æœºä¼šå’Œæ´å¯Ÿ",
         status="online",
         capabilities=["data_analysis", "visualization", "insight_generation"],
         icon="BarChart3"
@@ -82,13 +82,13 @@ AGENTS = [
 
 @router.get("/", response_model=List[AgentInfo])
 async def list_agents():
-    """»ñÈ¡ËùÓĞ AI ´úÀíĞÅÏ¢"""
+    """è·å–æ‰€æœ‰ AI ä»£ç†ä¿¡æ¯"""
     return AGENTS
 
 
 @router.get("/{agent_id}", response_model=AgentInfo)
 async def get_agent(agent_id: str):
-    """»ñÈ¡µ¥¸ö´úÀíĞÅÏ¢"""
+    """è·å–å•ä¸ªä»£ç†ä¿¡æ¯"""
     for agent in AGENTS:
         if agent.id == agent_id:
             return agent

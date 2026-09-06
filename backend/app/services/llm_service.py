@@ -1,4 +1,4 @@
-"""LLM ·þÎñ·â×°£¬Ö§³Ö OpenAI ¼°¼æÈÝ½Ó¿Ú"""
+"""LLM æœåŠ¡å°è£…ï¼Œæ”¯æŒ OpenAI åŠå…¼å®¹æŽ¥å£"""
 import openai
 from app.core.config import get_settings
 
@@ -17,7 +17,7 @@ async def chat_completion(
     max_tokens: int = 4096,
     stream: bool = False
 ) -> str:
-    """Í¨ÓÃ¶Ô»°½Ó¿Ú"""
+    """é€šç”¨å¯¹è¯æŽ¥å£"""
     model = model or settings.OPENAI_MODEL
 
     response = await client.chat.completions.create(
@@ -29,7 +29,7 @@ async def chat_completion(
     )
 
     if stream:
-        return response  # ·µ»ØÁ÷Ê½¶ÔÏó
+        return response  # è¿”å›žæµå¼å¯¹è±¡
     return response.choices[0].message.content
 
 
@@ -38,7 +38,7 @@ async def structured_output(
     schema: dict,
     model: str = None,
 ) -> dict:
-    """½á¹¹»¯Êä³ö£¨JSON Mode£©"""
+    """ç»“æž„åŒ–è¾“å‡ºï¼ˆJSON Modeï¼‰"""
     model = model or settings.OPENAI_MODEL
 
     response = await client.chat.completions.create(

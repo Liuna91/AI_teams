@@ -39,7 +39,7 @@ export default function Dashboard() {
       setNewProject({ name: "", description: "", idea: "" });
       loadProjects();
     } catch (err) {
-      alert("´´½¨Ê§°Ü£¬ÇëÖØÊÔ");
+      alert("åˆ›å»ºå¤±è´¥ï¼Œè¯·é‡è¯•");
     } finally {
       setCreating(false);
     }
@@ -52,15 +52,15 @@ export default function Dashboard() {
         <div className="p-4 space-y-2">
           <Link href="/dashboard" className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 text-white">
             <LayoutDashboard className="w-5 h-5" />
-            <span>ÏîÄ¿¹ÜÀí</span>
+            <span>é¡¹ç›®ç®¡ç†</span>
           </Link>
           <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors">
             <MessageSquare className="w-5 h-5" />
-            <span>ÍÅ¶Ó¶Ô»°</span>
+            <span>å›¢é˜Ÿå¯¹è¯</span>
           </button>
           <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-white/60 hover:bg-white/5 hover:text-white transition-colors">
             <Settings className="w-5 h-5" />
-            <span>ÉèÖÃ</span>
+            <span>è®¾ç½®</span>
           </button>
         </div>
       </aside>
@@ -70,14 +70,14 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto p-6">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-2xl font-bold">ÏîÄ¿¹ÜÀí</h1>
-              <p className="text-white/50 text-sm mt-1">¹ÜÀíÄãµÄ AI ÍÅ¶ÓÏîÄ¿</p>
+              <h1 className="text-2xl font-bold">é¡¹ç›®ç®¡ç†</h1>
+              <p className="text-white/50 text-sm mt-1">ç®¡ç†ä½ çš„ AI å›¢é˜Ÿé¡¹ç›®</p>
             </div>
             <button
               onClick={() => setShowCreate(true)}
               className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium hover:opacity-90 transition-opacity"
             >
-              <Plus className="w-4 h-4" /> ĞÂ½¨ÏîÄ¿
+              <Plus className="w-4 h-4" /> æ–°å»ºé¡¹ç›®
             </button>
           </div>
 
@@ -92,13 +92,13 @@ export default function Dashboard() {
               className="glass p-12 text-center"
             >
               <Sparkles className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">»¹Ã»ÓĞÏîÄ¿</h3>
-              <p className="text-white/50 mb-6">´´½¨ÄãµÄµÚÒ»¸ö AI ÍÅ¶ÓÏîÄ¿£¬½«Ïë·¨×ª»¯ÎªÏÖÊµ</p>
+              <h3 className="text-xl font-semibold mb-2">è¿˜æ²¡æœ‰é¡¹ç›®</h3>
+              <p className="text-white/50 mb-6">åˆ›å»ºä½ çš„ç¬¬ä¸€ä¸ª AI å›¢é˜Ÿé¡¹ç›®ï¼Œå°†æƒ³æ³•è½¬åŒ–ä¸ºç°å®</p>
               <button
                 onClick={() => setShowCreate(true)}
                 className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
               >
-                Á¢¼´´´½¨
+                ç«‹å³åˆ›å»º
               </button>
             </motion.div>
           ) : (
@@ -111,7 +111,7 @@ export default function Dashboard() {
 
           {/* Global Chat */}
           <div className="mt-12">
-            <h2 className="text-xl font-bold mb-4">Óë AI ÍÅ¶Ó¶Ô»°</h2>
+            <h2 className="text-xl font-bold mb-4">ä¸ AI å›¢é˜Ÿå¯¹è¯</h2>
             <ChatInterface />
           </div>
         </div>
@@ -129,34 +129,34 @@ export default function Dashboard() {
             animate={{ scale: 1, opacity: 1 }}
             className="glass w-full max-w-lg p-6"
           >
-            <h2 className="text-xl font-bold mb-4">ĞÂ½¨ÏîÄ¿</h2>
+            <h2 className="text-xl font-bold mb-4">æ–°å»ºé¡¹ç›®</h2>
             <div className="space-y-4">
               <div>
-                <label className="text-sm text-white/70 mb-1 block">ÏîÄ¿Ãû³Æ</label>
+                <label className="text-sm text-white/70 mb-1 block">é¡¹ç›®åç§°</label>
                 <input
                   type="text"
                   value={newProject.name}
                   onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
-                  placeholder="ÀıÈç£ºÖÇÄÜ¿Í·şÏµÍ³"
+                  placeholder="ä¾‹å¦‚ï¼šæ™ºèƒ½å®¢æœç³»ç»Ÿ"
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500/50"
                 />
               </div>
               <div>
-                <label className="text-sm text-white/70 mb-1 block">ÏîÄ¿ÃèÊö</label>
+                <label className="text-sm text-white/70 mb-1 block">é¡¹ç›®æè¿°</label>
                 <input
                   type="text"
                   value={newProject.description}
                   onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
-                  placeholder="¼ò¶ÌÃèÊöÏîÄ¿Ä¿±ê"
+                  placeholder="ç®€çŸ­æè¿°é¡¹ç›®ç›®æ ‡"
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500/50"
                 />
               </div>
               <div>
-                <label className="text-sm text-white/70 mb-1 block">ºËĞÄÏë·¨ *</label>
+                <label className="text-sm text-white/70 mb-1 block">æ ¸å¿ƒæƒ³æ³• *</label>
                 <textarea
                   value={newProject.idea}
                   onChange={(e) => setNewProject({ ...newProject, idea: e.target.value })}
-                  placeholder="ÏêÏ¸ÃèÊöÄãµÄ²úÆ·Ïë·¨£¬AI ÍÅ¶Ó»á»ùÓÚ´Ë½øĞĞ·ÖÎöºÍ¿ª·¢..."
+                  placeholder="è¯¦ç»†æè¿°ä½ çš„äº§å“æƒ³æ³•ï¼ŒAI å›¢é˜Ÿä¼šåŸºäºæ­¤è¿›è¡Œåˆ†æå’Œå¼€å‘..."
                   rows={4}
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 focus:outline-none focus:border-blue-500/50 resize-none"
                 />
@@ -167,14 +167,14 @@ export default function Dashboard() {
                 onClick={() => setShowCreate(false)}
                 className="px-5 py-2.5 rounded-xl text-white/70 hover:bg-white/5 transition-colors"
               >
-                È¡Ïû
+                å–æ¶ˆ
               </button>
               <button
                 onClick={handleCreate}
                 disabled={creating || !newProject.name.trim() || !newProject.idea.trim()}
                 className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
               >
-                {creating ? "´´½¨ÖĞ..." : "´´½¨ÏîÄ¿"}
+                {creating ? "åˆ›å»ºä¸­..." : "åˆ›å»ºé¡¹ç›®"}
               </button>
             </div>
           </motion.div>

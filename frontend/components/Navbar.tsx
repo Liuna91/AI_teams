@@ -15,14 +15,14 @@ export default function Navbar() {
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
             <Sparkles className="w-5 h-5 text-white" />
           </div>
-          <span className="text-xl font-bold tracking-tight">ÖÇÔ´¿Æ¼¼</span>
+          <span className="text-xl font-bold tracking-tight">æ™ºæºç§‘æŠ€</span>
         </Link>
 
         <div className="hidden md:flex items-center gap-8 text-sm text-white/60">
-          <a href="#team" className="hover:text-white transition-colors">AI ÍÅ¶Ó</a>
-          <a href="#features" className="hover:text-white transition-colors">¹¦ÄÜ</a>
-          <a href="#cases" className="hover:text-white transition-colors">°¸Àý</a>
-          <Link href="/dashboard" className="hover:text-white transition-colors">¿ØÖÆÌ¨</Link>
+          <a href="#team" className="hover:text-white transition-colors">AI å›¢é˜Ÿ</a>
+          <a href="#features" className="hover:text-white transition-colors">åŠŸèƒ½</a>
+          <a href="#cases" className="hover:text-white transition-colors">æ¡ˆä¾‹</a>
+          <Link href="/dashboard" className="hover:text-white transition-colors">æŽ§åˆ¶å°</Link>
         </div>
 
         <div className="flex items-center gap-4">
@@ -30,7 +30,7 @@ export default function Navbar() {
             href="/dashboard"
             className="hidden md:block px-5 py-2 rounded-full bg-white text-black text-sm font-semibold hover:bg-white/90 transition-colors"
           >
-            Á¢¼´ÌåÑé
+            ç«‹å³ä½“éªŒ
           </Link>
           <button
             className="md:hidden text-white"
@@ -48,10 +48,10 @@ export default function Navbar() {
           className="md:hidden bg-background/95 backdrop-blur-xl border-b border-white/5 px-6 py-4"
         >
           <div className="flex flex-col gap-4 text-white/70">
-            <a href="#team" onClick={() => setMobileOpen(false)}>AI ÍÅ¶Ó</a>
-            <a href="#features" onClick={() => setMobileOpen(false)}>¹¦ÄÜ</a>
-            <a href="#cases" onClick={() => setMobileOpen(false)}>°¸Àý</a>
-            <Link href="/dashboard" onClick={() => setMobileOpen(false)}>¿ØÖÆÌ¨</Link>
+            <a href="#team" onClick={() => setMobileOpen(false)}>AI å›¢é˜Ÿ</a>
+            <a href="#features" onClick={() => setMobileOpen(false)}>åŠŸèƒ½</a>
+            <a href="#cases" onClick={() => setMobileOpen(false)}>æ¡ˆä¾‹</a>
+            <Link href="/dashboard" onClick={() => setMobileOpen(false)}>æŽ§åˆ¶å°</Link>
           </div>
         </motion.div>
       )}

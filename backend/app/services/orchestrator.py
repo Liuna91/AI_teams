@@ -1,14 +1,14 @@
-"""±àÅÅ·þÎñ - Ð­µ÷ MetaGPT ºÍ OpenManus"""
+"""ç¼–æŽ’æœåŠ¡ - åè°ƒ MetaGPT å’Œ OpenManus"""
 from typing import Optional, Dict, Any
 from app.services.metagpt_service import metagpt_service
 from app.services.openmanus_service import openmanus_service
 
 
 class Orchestrator:
-    """ÏîÄ¿±àÅÅÆ÷£¬Ð­µ÷ AI ÍÅ¶ÓÍê³É¶Ëµ½¶Ë¿ª·¢"""
+    """é¡¹ç›®ç¼–æŽ’å™¨ï¼Œåè°ƒ AI å›¢é˜Ÿå®Œæˆç«¯åˆ°ç«¯å¼€å‘"""
 
     async def create_project(self, idea: str, name: str) -> dict:
-        """´´½¨ÐÂÏîÄ¿²¢Æô¶¯¹¤×÷Á÷"""
+        """åˆ›å»ºæ–°é¡¹ç›®å¹¶å¯åŠ¨å·¥ä½œæµ"""
         return {
             "project_id": 1,
             "name": name,
@@ -18,10 +18,10 @@ class Orchestrator:
         }
 
     async def run_phase(self, project_id: int, phase: str, context: dict) -> dict:
-        """ÔËÐÐÏîÄ¿Ä³¸ö½×¶Î"""
+        """è¿è¡Œé¡¹ç›®æŸä¸ªé˜¶æ®µ"""
 
         if phase == "research":
-            # OpenManus ×öµ÷ÑÐ
+            # OpenManus åšè°ƒç ”
             result = await openmanus_service.research(context.get("idea", ""))
             return {"phase": "research", "result": result, "agent": "Iris (OpenManus)"}
 
@@ -41,36 +41,36 @@ class Orchestrator:
             return {"phase": "develop", "result": code, "agent": "Alex"}
 
         elif phase == "full_workflow":
-            # ÍêÕû¹¤×÷Á÷
+            # å®Œæ•´å·¥ä½œæµ
             result = await metagpt_service.run_workflow(context.get("idea", ""), context.get("name", "project"))
             return {"phase": "full_workflow", "result": result, "agents": ["Emma", "Bob", "Alex", "QA"]}
 
         return {"error": f"Unknown phase: {phase}"}
 
     async def chat_with_team(self, message: str, project_context: dict) -> dict:
-        """Óë AI ÍÅ¶Ó¶Ô»°"""
+        """ä¸Ž AI å›¢é˜Ÿå¯¹è¯"""
         from app.services.llm_service import chat_completion
 
-        system_prompt = """ÄãÊÇ AI ÖÇÄÜ¹«Ë¾µÄÍÅ¶ÓÐ­µ÷Ô±¡£Äã´ú±íÕû¸ö AI ÍÅ¶Ó£¨ÑÐ¾¿Ô±¡¢¼Ü¹¹Ê¦¡¢²úÆ·¾­Àí¡¢¹¤³ÌÊ¦µÈ£©ÓëÓÃ»§¶Ô»°¡£
-¸ù¾ÝÓÃ»§µÄÎÊÌâ£¬ÅÐ¶ÏÓ¦¸ÃÓÉÄÄ¸ö½ÇÉ«»Ø´ð£¬²¢ÒÔ¸Ã½ÇÉ«µÄÉí·Ý»Ø¸´¡£
+        system_prompt = """ä½ æ˜¯ AI æ™ºèƒ½å…¬å¸çš„å›¢é˜Ÿåè°ƒå‘˜ã€‚ä½ ä»£è¡¨æ•´ä¸ª AI å›¢é˜Ÿï¼ˆç ”ç©¶å‘˜ã€æž¶æž„å¸ˆã€äº§å“ç»ç†ã€å·¥ç¨‹å¸ˆç­‰ï¼‰ä¸Žç”¨æˆ·å¯¹è¯ã€‚
+æ ¹æ®ç”¨æˆ·çš„é—®é¢˜ï¼Œåˆ¤æ–­åº”è¯¥ç”±å“ªä¸ªè§’è‰²å›žç­”ï¼Œå¹¶ä»¥è¯¥è§’è‰²çš„èº«ä»½å›žå¤ã€‚
 
-½ÇÉ«ËµÃ÷£º
-- Ð¡ÑÐ£¨ÑÐ¾¿Ô±£©£º¸ºÔðÊÐ³¡µ÷ÑÐ¡¢¾ºÆ··ÖÎö
-- °¢¹¹£¨¼Ü¹¹Ê¦£©£º¸ºÔð¼¼ÊõÑ¡ÐÍ¡¢ÏµÍ³Éè¼Æ
-- Ð¡²ú£¨²úÆ·¾­Àí£©£º¸ºÔðÐèÇó·ÖÎö¡¢¹¦ÄÜ¹æ»®
-- °¢¹¤£¨¹¤³ÌÊ¦£©£º¸ºÔð´úÂëÊµÏÖ¡¢¼¼ÊõÎÊÌâ
-- ÀÏ¹Ü£¨ÍÅ¶Ó¸ºÔðÈË£©£º¸ºÔðÕûÌåÐ­µ÷¡¢½ø¶È¹ÜÀí
+è§’è‰²è¯´æ˜Žï¼š
+- å°ç ”ï¼ˆç ”ç©¶å‘˜ï¼‰ï¼šè´Ÿè´£å¸‚åœºè°ƒç ”ã€ç«žå“åˆ†æž
+- é˜¿æž„ï¼ˆæž¶æž„å¸ˆï¼‰ï¼šè´Ÿè´£æŠ€æœ¯é€‰åž‹ã€ç³»ç»Ÿè®¾è®¡
+- å°äº§ï¼ˆäº§å“ç»ç†ï¼‰ï¼šè´Ÿè´£éœ€æ±‚åˆ†æžã€åŠŸèƒ½è§„åˆ’
+- é˜¿å·¥ï¼ˆå·¥ç¨‹å¸ˆï¼‰ï¼šè´Ÿè´£ä»£ç å®žçŽ°ã€æŠ€æœ¯é—®é¢˜
+- è€ç®¡ï¼ˆå›¢é˜Ÿè´Ÿè´£äººï¼‰ï¼šè´Ÿè´£æ•´ä½“åè°ƒã€è¿›åº¦ç®¡ç†
 
-ÇëÓÃÖÐÎÄ»Ø¸´£¬ÓïÆø×¨Òµµ«ÓÑºÃ¡£"""
+è¯·ç”¨ä¸­æ–‡å›žå¤ï¼Œè¯­æ°”ä¸“ä¸šä½†å‹å¥½ã€‚"""
 
         messages = [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"ÏîÄ¿±³¾°£º{json.dumps(project_context, ensure_ascii=False)}\n\nÓÃ»§ÎÊÌâ£º{message}"}
+            {"role": "user", "content": f"é¡¹ç›®èƒŒæ™¯ï¼š{json.dumps(project_context, ensure_ascii=False)}\n\nç”¨æˆ·é—®é¢˜ï¼š{message}"}
         ]
 
         response = await chat_completion(messages, temperature=0.7)
-        return {"response": response, "agent": "AI ÍÅ¶Ó"}
+        return {"response": response, "agent": "AI å›¢é˜Ÿ"}
 
 
-# µ¥Àý
+# å•ä¾‹
 orchestrator = Orchestrator()

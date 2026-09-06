@@ -40,14 +40,14 @@ export default function ProjectDetail() {
 
   const handleResearch = async () => {
     setActionLoading("research");
-    addLog("Æô¶¯Éî¶Èµ÷ÑĞ...");
+    addLog("å¯åŠ¨æ·±åº¦è°ƒç ”...");
     try {
       const res = await researchProject(projectId);
-      addLog("µ÷ÑĞÍê³É£¡");
+      addLog("è°ƒç ”å®Œæˆï¼");
       addLog(JSON.stringify(res.result, null, 2).substring(0, 500));
       loadProject();
     } catch (err) {
-      addLog("µ÷ÑĞÊ§°Ü: " + String(err));
+      addLog("è°ƒç ”å¤±è´¥: " + String(err));
     } finally {
       setActionLoading(null);
     }
@@ -55,14 +55,14 @@ export default function ProjectDetail() {
 
   const handleDevelop = async () => {
     setActionLoading("develop");
-    addLog("Æô¶¯¿ª·¢Á÷³Ì...");
+    addLog("å¯åŠ¨å¼€å‘æµç¨‹...");
     try {
       const res = await developProject(projectId);
-      addLog("¿ª·¢Íê³É£¡");
+      addLog("å¼€å‘å®Œæˆï¼");
       addLog(JSON.stringify(res.result, null, 2).substring(0, 500));
       loadProject();
     } catch (err) {
-      addLog("¿ª·¢Ê§°Ü: " + String(err));
+      addLog("å¼€å‘å¤±è´¥: " + String(err));
     } finally {
       setActionLoading(null);
     }
@@ -80,9 +80,9 @@ export default function ProjectDetail() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-white/50">ÏîÄ¿²»´æÔÚ</p>
+          <p className="text-white/50">é¡¹ç›®ä¸å­˜åœ¨</p>
           <Link href="/dashboard" className="text-blue-400 hover:underline mt-2 inline-block">
-            ·µ»Ø¿ØÖÆÌ¨
+            è¿”å›æ§åˆ¶å°
           </Link>
         </div>
       </div>
@@ -90,11 +90,11 @@ export default function ProjectDetail() {
   }
 
   const statusSteps = [
-    { key: "pending", label: "´ı¿ªÊ¼", icon: Clock },
-    { key: "researching", label: "µ÷ÑĞÖĞ", icon: Search },
-    { key: "researched", label: "µ÷ÑĞÍê³É", icon: CheckCircle2 },
-    { key: "developing", label: "¿ª·¢ÖĞ", icon: Code2 },
-    { key: "developed", label: "¿ª·¢Íê³É", icon: CheckCircle2 },
+    { key: "pending", label: "å¾…å¼€å§‹", icon: Clock },
+    { key: "researching", label: "è°ƒç ”ä¸­", icon: Search },
+    { key: "researched", label: "è°ƒç ”å®Œæˆ", icon: CheckCircle2 },
+    { key: "developing", label: "å¼€å‘ä¸­", icon: Code2 },
+    { key: "developed", label: "å¼€å‘å®Œæˆ", icon: CheckCircle2 },
   ];
 
   const currentStepIndex = statusSteps.findIndex((s) => s.key === project.status);
@@ -118,7 +118,7 @@ export default function ProjectDetail() {
           <div className="lg:col-span-2 space-y-6">
             {/* Status Progress */}
             <div className="glass p-6">
-              <h2 className="text-lg font-semibold mb-4">ÏîÄ¿½ø¶È</h2>
+              <h2 className="text-lg font-semibold mb-4">é¡¹ç›®è¿›åº¦</h2>
               <div className="flex items-center gap-2">
                 {statusSteps.map((step, i) => {
                   const Icon = step.icon;
@@ -143,7 +143,7 @@ export default function ProjectDetail() {
 
             {/* Actions */}
             <div className="glass p-6">
-              <h2 className="text-lg font-semibold mb-4">Ö´ĞĞ²Ù×÷</h2>
+              <h2 className="text-lg font-semibold mb-4">æ‰§è¡Œæ“ä½œ</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <button
                   onClick={handleResearch}
@@ -154,8 +154,8 @@ export default function ProjectDetail() {
                     <Search className="w-5 h-5 text-blue-400" />
                   </div>
                   <div>
-                    <p className="font-medium">Éî¶Èµ÷ÑĞ</p>
-                    <p className="text-xs text-white/50">OpenManus ·ÖÎöÊĞ³¡ºÍ¾ºÆ·</p>
+                    <p className="font-medium">æ·±åº¦è°ƒç ”</p>
+                    <p className="text-xs text-white/50">OpenManus åˆ†æå¸‚åœºå’Œç«å“</p>
                   </div>
                   {actionLoading === "research" && <Loader2 className="w-5 h-5 animate-spin ml-auto" />}
                 </button>
@@ -169,8 +169,8 @@ export default function ProjectDetail() {
                     <Code2 className="w-5 h-5 text-purple-400" />
                   </div>
                   <div>
-                    <p className="font-medium">¿ªÊ¼¿ª·¢</p>
-                    <p className="text-xs text-white/50">MetaGPT ¶à½ÇÉ«Ğ­×÷¿ª·¢</p>
+                    <p className="font-medium">å¼€å§‹å¼€å‘</p>
+                    <p className="text-xs text-white/50">MetaGPT å¤šè§’è‰²åä½œå¼€å‘</p>
                   </div>
                   {actionLoading === "develop" && <Loader2 className="w-5 h-5 animate-spin ml-auto" />}
                 </button>
@@ -180,8 +180,8 @@ export default function ProjectDetail() {
                     <Rocket className="w-5 h-5 text-emerald-400" />
                   </div>
                   <div>
-                    <p className="font-medium">²¿ÊğÉÏÏß</p>
-                    <p className="text-xs text-white/50">×Ô¶¯²¿Êğµ½ÔÆ¶Ë</p>
+                    <p className="font-medium">éƒ¨ç½²ä¸Šçº¿</p>
+                    <p className="text-xs text-white/50">è‡ªåŠ¨éƒ¨ç½²åˆ°äº‘ç«¯</p>
                   </div>
                 </button>
 
@@ -190,8 +190,8 @@ export default function ProjectDetail() {
                     <FileText className="w-5 h-5 text-amber-400" />
                   </div>
                   <div>
-                    <p className="font-medium">µ¼³ö´úÂë</p>
-                    <p className="text-xs text-white/50">Í¬²½µ½ GitHub</p>
+                    <p className="font-medium">å¯¼å‡ºä»£ç </p>
+                    <p className="text-xs text-white/50">åŒæ­¥åˆ° GitHub</p>
                   </div>
                 </button>
               </div>
@@ -205,7 +205,7 @@ export default function ProjectDetail() {
                 className="glass p-6"
               >
                 <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <GitBranch className="w-5 h-5" /> Ö´ĞĞÈÕÖ¾
+                  <GitBranch className="w-5 h-5" /> æ‰§è¡Œæ—¥å¿—
                 </h2>
                 <div className="bg-black/30 rounded-xl p-4 max-h-64 overflow-y-auto font-mono text-xs space-y-1">
                   {logs.map((log, i) => (

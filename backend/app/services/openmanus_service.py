@@ -1,4 +1,4 @@
-"""OpenManus ¼¯³É·şÎñ - Í¨ÓÃ´úÀíÖ´ĞĞÄÜÁ¦"""
+"""OpenManus é›†æˆæœåŠ¡ - é€šç”¨ä»£ç†æ‰§è¡Œèƒ½åŠ›"""
 import os
 import json
 from typing import Optional, List, Dict, Any
@@ -6,27 +6,27 @@ from app.services.llm_service import chat_completion
 
 
 class OpenManusService:
-    """Ä£Äâ OpenManus µÄÍ¨ÓÃ´úÀíÄÜÁ¦"""
+    """æ¨¡æ‹Ÿ OpenManus çš„é€šç”¨ä»£ç†èƒ½åŠ›"""
 
     TOOLS = {
         "browser": {
-            "name": "ä¯ÀÀÆ÷×Ô¶¯»¯",
-            "description": "ä¯ÀÀÍøÒ³¡¢×¥È¡ĞÅÏ¢¡¢½ØÍ¼ÑéÖ¤",
+            "name": "æµè§ˆå™¨è‡ªåŠ¨åŒ–",
+            "description": "æµè§ˆç½‘é¡µã€æŠ“å–ä¿¡æ¯ã€æˆªå›¾éªŒè¯",
             "capabilities": ["navigate", "screenshot", "click", "type", "extract"]
         },
         "search": {
-            "name": "Éî¶ÈËÑË÷",
-            "description": "ËÑË÷»¥ÁªÍøĞÅÏ¢£¬·ÖÎö¾ºÆ·ºÍÊĞ³¡",
+            "name": "æ·±åº¦æœç´¢",
+            "description": "æœç´¢äº’è”ç½‘ä¿¡æ¯ï¼Œåˆ†æç«å“å’Œå¸‚åœº",
             "capabilities": ["web_search", "analyze", "summarize"]
         },
         "file": {
-            "name": "ÎÄ¼ş²Ù×÷",
-            "description": "¶ÁĞ´ÎÄ¼ş¡¢¹ÜÀíÏîÄ¿½á¹¹",
+            "name": "æ–‡ä»¶æ“ä½œ",
+            "description": "è¯»å†™æ–‡ä»¶ã€ç®¡ç†é¡¹ç›®ç»“æ„",
             "capabilities": ["read", "write", "list", "mkdir"]
         },
         "deploy": {
-            "name": "²¿ÊğÑéÖ¤",
-            "description": "²¿ÊğÓ¦ÓÃ²¢ÑéÖ¤ÔËĞĞ×´Ì¬",
+            "name": "éƒ¨ç½²éªŒè¯",
+            "description": "éƒ¨ç½²åº”ç”¨å¹¶éªŒè¯è¿è¡ŒçŠ¶æ€",
             "capabilities": ["build", "deploy", "health_check"]
         }
     }
@@ -36,22 +36,22 @@ class OpenManusService:
         os.makedirs(workspace_dir, exist_ok=True)
 
     async def research(self, query: str, depth: int = 3) -> dict:
-        """Éî¶Èµ÷ÑĞ"""
-        system_prompt = """ÄãÊÇÒ»Î»Éî¶ÈÑĞ¾¿Ô±¡£ÄãµÄÖ°ÔğÊÇÍ¨¹ı·ÖÎöËÑË÷ĞÅÏ¢£¬·¢ÏÖÕæÊµĞèÇóºÍÊĞ³¡»ú»á¡£
-Çë»ùÓÚÓÃ»§µÄÎÊÌâ£¬½øĞĞÉî¶Èµ÷ÑĞ²¢Êä³ö½á¹¹»¯±¨¸æ¡£
+        """æ·±åº¦è°ƒç ”"""
+        system_prompt = """ä½ æ˜¯ä¸€ä½æ·±åº¦ç ”ç©¶å‘˜ã€‚ä½ çš„èŒè´£æ˜¯é€šè¿‡åˆ†ææœç´¢ä¿¡æ¯ï¼Œå‘ç°çœŸå®éœ€æ±‚å’Œå¸‚åœºæœºä¼šã€‚
+è¯·åŸºäºç”¨æˆ·çš„é—®é¢˜ï¼Œè¿›è¡Œæ·±åº¦è°ƒç ”å¹¶è¾“å‡ºç»“æ„åŒ–æŠ¥å‘Šã€‚
 
-±¨¸æ¸ñÊ½£º
-1. ÊĞ³¡¸ÅÊö
-2. ¾ºÆ··ÖÎö£¨3-5¸öÖ÷Òª¾ºÆ·£©
-3. ÓÃ»§ĞèÇó¶´²ì
-4. »ú»áµãÊ¶±ğ
-5. ½¨Òé·½°¸
+æŠ¥å‘Šæ ¼å¼ï¼š
+1. å¸‚åœºæ¦‚è¿°
+2. ç«å“åˆ†æï¼ˆ3-5ä¸ªä¸»è¦ç«å“ï¼‰
+3. ç”¨æˆ·éœ€æ±‚æ´å¯Ÿ
+4. æœºä¼šç‚¹è¯†åˆ«
+5. å»ºè®®æ–¹æ¡ˆ
 
-ÇëÓÃÖĞÎÄ»Ø¸´¡£"""
+è¯·ç”¨ä¸­æ–‡å›å¤ã€‚"""
 
         messages = [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Çë¶ÔÒÔÏÂÖ÷Ìâ½øĞĞÉî¶Èµ÷ÑĞ£º\n\n{query}"}
+            {"role": "user", "content": f"è¯·å¯¹ä»¥ä¸‹ä¸»é¢˜è¿›è¡Œæ·±åº¦è°ƒç ”ï¼š\n\n{query}"}
         ]
 
         response = await chat_completion(messages, temperature=0.5, max_tokens=4000)
@@ -60,27 +60,27 @@ class OpenManusService:
             "query": query,
             "depth": depth,
             "report": response,
-            "sources": ["AI ·ÖÎöÉú³É"],
+            "sources": ["AI åˆ†æç”Ÿæˆ"],
             "timestamp": str(datetime.now()) if 'datetime' in dir() else "2025-01-01"
         }
 
     async def analyze_competitors(self, product_idea: str) -> dict:
-        """¾ºÆ··ÖÎö"""
-        prompt = f"""Çë¶ÔÒÔÏÂ²úÆ·Ïë·¨½øĞĞÏêÏ¸µÄ¾ºÆ··ÖÎö£º
+        """ç«å“åˆ†æ"""
+        prompt = f"""è¯·å¯¹ä»¥ä¸‹äº§å“æƒ³æ³•è¿›è¡Œè¯¦ç»†çš„ç«å“åˆ†æï¼š
 
-²úÆ·Ïë·¨£º{product_idea}
+äº§å“æƒ³æ³•ï¼š{product_idea}
 
-Çë·ÖÎö£º
-1. Ö±½Ó¾ºÆ·£¨¹¦ÄÜÏàËÆ£©
-2. ¼ä½Ó¾ºÆ·£¨½â¾öÏàÍ¬ÎÊÌâ£©
-3. Ìæ´ú·½°¸
-4. Ã¿¸ö¾ºÆ·µÄÓÅÈ±µã
-5. ²îÒì»¯»ú»á
+è¯·åˆ†æï¼š
+1. ç›´æ¥ç«å“ï¼ˆåŠŸèƒ½ç›¸ä¼¼ï¼‰
+2. é—´æ¥ç«å“ï¼ˆè§£å†³ç›¸åŒé—®é¢˜ï¼‰
+3. æ›¿ä»£æ–¹æ¡ˆ
+4. æ¯ä¸ªç«å“çš„ä¼˜ç¼ºç‚¹
+5. å·®å¼‚åŒ–æœºä¼š
 
-Êä³ö JSON ¸ñÊ½¡£"""
+è¾“å‡º JSON æ ¼å¼ã€‚"""
 
         messages = [
-            {"role": "system", "content": "ÄãÊÇÒ»Î»ÊĞ³¡·ÖÎöÊ¦£¬ÉÃ³¤¾ºÆ··ÖÎöºÍÕ½ÂÔ¹æ»®¡£ÇëÓÃÖĞÎÄ»Ø¸´¡£"},
+            {"role": "system", "content": "ä½ æ˜¯ä¸€ä½å¸‚åœºåˆ†æå¸ˆï¼Œæ“…é•¿ç«å“åˆ†æå’Œæˆ˜ç•¥è§„åˆ’ã€‚è¯·ç”¨ä¸­æ–‡å›å¤ã€‚"},
             {"role": "user", "content": prompt}
         ]
 
@@ -93,22 +93,22 @@ class OpenManusService:
         return result
 
     async def validate_idea(self, idea: str) -> dict:
-        """ÑéÖ¤Ïë·¨¿ÉĞĞĞÔ"""
-        prompt = f"""ÇëÆÀ¹ÀÒÔÏÂ²úÆ·Ïë·¨µÄ¿ÉĞĞĞÔ£º
+        """éªŒè¯æƒ³æ³•å¯è¡Œæ€§"""
+        prompt = f"""è¯·è¯„ä¼°ä»¥ä¸‹äº§å“æƒ³æ³•çš„å¯è¡Œæ€§ï¼š
 
-Ïë·¨£º{idea}
+æƒ³æ³•ï¼š{idea}
 
-Çë´ÓÒÔÏÂÎ¬¶ÈÆÀ·Ö£¨1-10·Ö£©²¢¸ø³ö½¨Òé£º
-1. ÊĞ³¡ĞèÇó¶È
-2. ¼¼Êõ¿ÉĞĞĞÔ
-3. ¾ºÕùÇ¿¶È
-4. ±äÏÖÇ±Á¦
-5. Æô¶¯ÄÑ¶È
+è¯·ä»ä»¥ä¸‹ç»´åº¦è¯„åˆ†ï¼ˆ1-10åˆ†ï¼‰å¹¶ç»™å‡ºå»ºè®®ï¼š
+1. å¸‚åœºéœ€æ±‚åº¦
+2. æŠ€æœ¯å¯è¡Œæ€§
+3. ç«äº‰å¼ºåº¦
+4. å˜ç°æ½œåŠ›
+5. å¯åŠ¨éš¾åº¦
 
-ÇëÓÃÖĞÎÄ»Ø¸´¡£"""
+è¯·ç”¨ä¸­æ–‡å›å¤ã€‚"""
 
         messages = [
-            {"role": "system", "content": "ÄãÊÇÒ»Î»´´Òµ¹ËÎÊ£¬ÉÃ³¤ÆÀ¹À²úÆ·Ïë·¨¡£ÇëÓÃÖĞÎÄ»Ø¸´¡£"},
+            {"role": "system", "content": "ä½ æ˜¯ä¸€ä½åˆ›ä¸šé¡¾é—®ï¼Œæ“…é•¿è¯„ä¼°äº§å“æƒ³æ³•ã€‚è¯·ç”¨ä¸­æ–‡å›å¤ã€‚"},
             {"role": "user", "content": prompt}
         ]
 
@@ -116,7 +116,7 @@ class OpenManusService:
         return {"idea": idea, "validation": response}
 
     async def run_task(self, task_type: str, params: dict) -> dict:
-        """Í¨ÓÃÈÎÎñÖ´ĞĞ"""
+        """é€šç”¨ä»»åŠ¡æ‰§è¡Œ"""
         handlers = {
             "research": self.research,
             "competitor_analysis": self.analyze_competitors,
@@ -133,5 +133,5 @@ class OpenManusService:
         return {"error": f"Unknown task type: {task_type}"}
 
 
-# µ¥Àı
+# å•ä¾‹
 openmanus_service = OpenManusService()

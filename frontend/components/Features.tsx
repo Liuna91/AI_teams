@@ -7,20 +7,20 @@ import {
 } from "lucide-react";
 
 const featureList = [
-  { icon: Sparkles, title: "���ӻ��༭��", desc: "��ȷ�������ֺ����������������" },
-  { icon: Database, title: "��Դ�ƺ��", desc: "�����û���¼�����ݿ⡢֧�����ɺ͵����й�" },
-  { icon: Zap, title: "����ģʽ", desc: "ͬʱ���ж��ģ�ͣ�˲������Ѱ汾" },
-  { icon: Shield, title: "AI ����", desc: "�����ý��� Gemini��GPT ��������ģ��" },
-  { icon: Globe, title: "SEO ����", desc: "�Զ��Ż�վ��ṹ������������������" },
-  { icon: Megaphone, title: "���ר��", desc: "�Զ������Ͷ�š�׷�ٺ��Ż�" },
+  { icon: Sparkles, title: "可视化编辑器", desc: "精确调整布局和组件，所见即所得" },
+  { icon: Database, title: "智源云后端", desc: "内置用户登录、数据库、支付集成和弹性托管" },
+  { icon: Zap, title: "竞速模式", desc: "同时运行多个模型，瞬间获得最佳版本" },
+  { icon: Shield, title: "AI 集成", desc: "零配置接入 Gemini、GPT 等主流大模型" },
+  { icon: Globe, title: "SEO 代理", desc: "自动优化站点结构，提升搜索引擎排名" },
+  { icon: Megaphone, title: "广告专家", desc: "自动化广告投放、追踪和优化" },
 ];
 
 const highlights = [
-  { title: "���Ӽ�����", desc: "������Դ����뷨���������ڼ��ɻ�ÿ�ʹ�õ�Ӧ�á�ͨ���Ի���ȡ�����Ĺ���ҳ�桢���̺����ԡ�" },
-  { title: "��ʵӦ�ã�����ʾ", desc: "���������ߡ�������������չ����ʵ��Ʒ�������û���¼�����ݴ洢��Stripe ֧����ȫջ������" },
-  { title: "��ҵ���߼�", desc: "��һ���ط������������������г����С�ȫջ����������SEO �Ż������ɺͽ��׷�٣�ȫ���Զ�����" },
-  { title: "��ȡ���ѿͻ�", desc: "���뷨ת��Ϊ����Ը�⸶�ѵĲ�Ʒ����Դ���𷢲����йܺ��ճ���Ӫ��������������롣" },
-  { title: "��ȫ�ɿ�", desc: "��ʱ�������벢ͬ���� GitHub������ҵ�������������Ŀӵ����ȫ����Ȩ��" },
+  { title: "分钟级上线", desc: "告诉智源你的想法，几分钟内即可获得可使用的应用。通过对话获取完整的功能页面、流程和特性。" },
+  { title: "真实应用，非演示", desc: "构建可上线、可增长、可扩展的真实产品。内置用户登录、数据存储、Stripe 支付等全栈能力。" },
+  { title: "商业工具集", desc: "在一个地方运行完整工作流。市场调研、全栈开发、部署、SEO 优化、集成和结果追踪，全部自动化。" },
+  { title: "获取付费客户", desc: "将想法转化为人们愿意付费的产品。智源负责发布、托管和日常运营，让你更快获得收入。" },
+  { title: "完全可控", desc: "随时导出代码并同步到 GitHub。随着业务增长，你对项目拥有完全控制权。" },
 ];
 
 const fadeIn = {
@@ -47,7 +47,7 @@ export default function Features() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              �о�����ơ�������<span className="text-gradient">Ӫ��</span> һ�廯
+              研究、设计、开发、<span className="text-gradient">营销</span> 一体化
             </h2>
           </motion.div>
 
@@ -83,7 +83,7 @@ export default function Features() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              ���������������������<span className="text-gradient">һ��</span>
+              构建、发布、增长所需的<span className="text-gradient">一切</span>
             </h2>
           </motion.div>
 

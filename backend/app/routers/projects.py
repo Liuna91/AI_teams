@@ -11,7 +11,7 @@ router = APIRouter(prefix="/projects", tags=["Projects"])
 
 @router.post("/", response_model=ProjectResponse)
 async def create_project(project: ProjectCreate, db: Session = Depends(get_db)):
-    """´´½¨ĞÂÏîÄ¿"""
+    """åˆ›å»ºæ–°é¡¹ç›®"""
     db_project = Project(
         name=project.name,
         description=project.description,
@@ -26,14 +26,14 @@ async def create_project(project: ProjectCreate, db: Session = Depends(get_db)):
 
 @router.get("/", response_model=List[ProjectResponse])
 async def list_projects(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    """ÁĞ³öËùÓĞÏîÄ¿"""
+    """åˆ—å‡ºæ‰€æœ‰é¡¹ç›®"""
     projects = db.query(Project).offset(skip).limit(limit).all()
     return projects
 
 
 @router.get("/{project_id}", response_model=ProjectResponse)
 async def get_project(project_id: int, db: Session = Depends(get_db)):
-    """»ñÈ¡ÏîÄ¿ÏêÇé"""
+    """è·å–é¡¹ç›®è¯¦æƒ…"""
     project = db.query(Project).filter(Project.id == project_id).first()
     if not project:
         raise HTTPException(status_code=404, detail="Project not found")
@@ -42,7 +42,7 @@ async def get_project(project_id: int, db: Session = Depends(get_db)):
 
 @router.put("/{project_id}", response_model=ProjectResponse)
 async def update_project(project_id: int, project_update: ProjectUpdate, db: Session = Depends(get_db)):
-    """¸üĞÂÏîÄ¿"""
+    """æ›´æ–°é¡¹ç›®"""
     project = db.query(Project).filter(Project.id == project_id).first()
     if not project:
         raise HTTPException(status_code=404, detail="Project not found")
@@ -57,7 +57,7 @@ async def update_project(project_id: int, project_update: ProjectUpdate, db: Ses
 
 @router.delete("/{project_id}")
 async def delete_project(project_id: int, db: Session = Depends(get_db)):
-    """É¾³ıÏîÄ¿"""
+    """åˆ é™¤é¡¹ç›®"""
     project = db.query(Project).filter(Project.id == project_id).first()
     if not project:
         raise HTTPException(status_code=404, detail="Project not found")
@@ -68,7 +68,7 @@ async def delete_project(project_id: int, db: Session = Depends(get_db)):
 
 @router.post("/{project_id}/research")
 async def research_project(project_id: int, db: Session = Depends(get_db)):
-    """Æô¶¯ÏîÄ¿µ÷ÑĞ£¨OpenManus£©"""
+    """å¯åŠ¨é¡¹ç›®è°ƒç ”ï¼ˆOpenManusï¼‰"""
     project = db.query(Project).filter(Project.id == project_id).first()
     if not project:
         raise HTTPException(status_code=404, detail="Project not found")
@@ -76,7 +76,7 @@ async def research_project(project_id: int, db: Session = Depends(get_db)):
     project.status = "researching"
     db.commit()
 
-    # ´´½¨ÈÎÎñ¼ÇÂ¼
+    # åˆ›å»ºä»»åŠ¡è®°å½•
     task = Task(
         project_id=project_id,
         agent_role="researcher",
@@ -87,7 +87,7 @@ async def research_project(project_id: int, db: Session = Depends(get_db)):
     db.add(task)
     db.commit()
 
-    # µ÷ÓÃ OpenManus µ÷ÑĞ
+    # è°ƒç”¨ OpenManus è°ƒç ”
     result = await orchestrator.run_phase(project_id, "research", {"idea": project.idea})
 
     task.status = "completed"
@@ -102,7 +102,7 @@ async def research_project(project_id: int, db: Session = Depends(get_db)):
 
 @router.post("/{project_id}/develop")
 async def develop_project(project_id: int, db: Session = Depends(get_db)):
-    """Æô¶¯ÏîÄ¿¿ª·¢£¨MetaGPT£©"""
+    """å¯åŠ¨é¡¹ç›®å¼€å‘ï¼ˆMetaGPTï¼‰"""
     project = db.query(Project).filter(Project.id == project_id).first()
     if not project:
         raise HTTPException(status_code=404, detail="Project not found")
@@ -120,7 +120,7 @@ async def develop_project(project_id: int, db: Session = Depends(get_db)):
     db.add(task)
     db.commit()
 
-    # µ÷ÓÃ MetaGPT ¿ª·¢
+    # è°ƒç”¨ MetaGPT å¼€å‘
     result = await orchestrator.run_phase(project_id, "full_workflow", {
         "idea": project.idea,
         "name": project.name
@@ -138,6 +138,6 @@ async def develop_project(project_id: int, db: Session = Depends(get_db)):
 
 @router.get("/{project_id}/tasks", response_model=List[TaskResponse])
 async def get_project_tasks(project_id: int, db: Session = Depends(get_db)):
-    """»ñÈ¡ÏîÄ¿ÈÎÎñÁĞ±í"""
+    """è·å–é¡¹ç›®ä»»åŠ¡åˆ—è¡¨"""
     tasks = db.query(Task).filter(Task.project_id == project_id).all()
     return tasks

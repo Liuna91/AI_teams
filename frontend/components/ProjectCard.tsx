@@ -13,12 +13,12 @@ interface Project {
 }
 
 const statusConfig: Record<string, { icon: any; color: string; label: string }> = {
-  pending: { icon: Clock, color: "text-yellow-400", label: "´ı¿ªÊ¼" },
-  researching: { icon: Search, color: "text-blue-400", label: "µ÷ÑĞÖĞ" },
-  researched: { icon: CheckCircle2, color: "text-blue-400", label: "µ÷ÑĞÍê³É" },
-  developing: { icon: Code2, color: "text-purple-400", label: "¿ª·¢ÖĞ" },
-  developed: { icon: CheckCircle2, color: "text-emerald-400", label: "¿ª·¢Íê³É" },
-  failed: { icon: AlertCircle, color: "text-red-400", label: "Ê§°Ü" },
+  pending: { icon: Clock, color: "text-yellow-400", label: "å¾…å¼€å§‹" },
+  researching: { icon: Search, color: "text-blue-400", label: "è°ƒç ”ä¸­" },
+  researched: { icon: CheckCircle2, color: "text-blue-400", label: "è°ƒç ”å®Œæˆ" },
+  developing: { icon: Code2, color: "text-purple-400", label: "å¼€å‘ä¸­" },
+  developed: { icon: CheckCircle2, color: "text-emerald-400", label: "å¼€å‘å®Œæˆ" },
+  failed: { icon: AlertCircle, color: "text-red-400", label: "å¤±è´¥" },
 };
 
 export default function ProjectCard({ project, index }: { project: Project; index: number }) {
@@ -38,7 +38,7 @@ export default function ProjectCard({ project, index }: { project: Project; inde
               <h3 className="text-lg font-semibold group-hover:text-blue-400 transition-colors">
                 {project.name}
               </h3>
-              <p className="text-sm text-white/50 mt-1 line-clamp-2">{project.description || "ÔİÎŞÃèÊö"}</p>
+              <p className="text-sm text-white/50 mt-1 line-clamp-2">{project.description || "æš‚æ— æè¿°"}</p>
             </div>
             <StatusIcon className={`w-5 h-5 ${status.color}`} />
           </div>

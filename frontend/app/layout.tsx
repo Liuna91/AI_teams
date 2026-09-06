@@ -5,9 +5,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ÖÇÔ´¿Æ¼¼ - AI ÖÇÄÜ¹«Ë¾",
-  description: "ÓÃ AI ÍÅ¶Ó½«Ïë·¨×ª»¯Îª¿ÉÏúÊÛµÄ²úÆ·£¬ÎŞĞè±àĞ´´úÂë¡£¼¯³É MetaGPT + OpenManus µÄ¶àÖÇÄÜÌå¿ª·¢Æ½Ì¨¡£",
-  keywords: ["AI", "MetaGPT", "OpenManus", "¶àÖÇÄÜÌå", "×Ô¶¯¿ª·¢", "ÎŞ´úÂë"],
+  title: "æ™ºæºç§‘æŠ€ - AI æ™ºèƒ½å…¬å¸",
+  description: "ç”¨ AI å›¢é˜Ÿå°†æƒ³æ³•è½¬åŒ–ä¸ºå¯é”€å”®çš„äº§å“ï¼Œæ— éœ€ç¼–å†™ä»£ç ã€‚é›†æˆ MetaGPT + OpenManus çš„å¤šæ™ºèƒ½ä½“å¼€å‘å¹³å°ã€‚",
+  keywords: ["AI", "MetaGPT", "OpenManus", "å¤šæ™ºèƒ½ä½“", "è‡ªåŠ¨å¼€å‘", "æ— ä»£ç "],
 };
 
 export default function RootLayout({

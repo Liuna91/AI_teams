@@ -46,7 +46,9 @@ services:
       - ai-network
 
   # MetaGPT Worker (optional, for heavy tasks)
+  # 默认不启动（需先实现 app.core.celery 模块）；启用方式：docker-compose --profile worker up -d
   metagpt-worker:
+    profiles: ["worker"]
     build:
       context: ./backend
       dockerfile: Dockerfile

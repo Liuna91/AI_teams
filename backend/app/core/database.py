@@ -57,7 +57,8 @@ class Message(Base):
     role = Column(String(50))  # user, agent, system
     agent_name = Column(String(100), nullable=True)
     content = Column(Text)
-    metadata = Column(JSON, default=dict)
+    # "metadata" 是 SQLAlchemy Declarative API 保留字，Python 属性改名，数据库列名保持 metadata
+    extra_metadata = Column("metadata", JSON, default=dict)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     project = relationship("Project", back_populates="messages")

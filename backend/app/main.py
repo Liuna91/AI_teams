@@ -8,7 +8,7 @@ settings = get_settings()
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
-    description="AI ÖÇÄÜ¹«Ë¾ API - ¼¯³É MetaGPT + OpenManus µÄ¶àÖÇÄÜÌå¿ª·¢Æ½Ì¨",
+    description="AI æ™ºèƒ½å…¬å¸ API - é›†æˆ MetaGPT + OpenManus çš„å¤šæ™ºèƒ½ä½“å¼€å‘å¹³å°",
     docs_url="/docs",
     redoc_url="/redoc",
 )
@@ -16,13 +16,13 @@ app = FastAPI(
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Éú²ú»·¾³ÇëÏŞÖÆÓòÃû
+    allow_origins=["*"],  # ç”Ÿäº§ç¯å¢ƒè¯·é™åˆ¶åŸŸå
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Â·ÓÉ
+# è·¯ç”±
 app.include_router(projects.router, prefix="/api/v1")
 app.include_router(agents.router, prefix="/api/v1")
 app.include_router(chat.router, prefix="/api/v1")

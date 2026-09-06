@@ -6,7 +6,7 @@ from app.services.llm_service import chat_completion
 
 router = APIRouter(prefix="/chat", tags=["Chat"])
 
-# ´æ´¢ WebSocket Á¬½Ó
+# å­˜å‚¨ WebSocket è¿æ¥
 class ConnectionManager:
     def __init__(self):
         self.active_connections: Dict[str, WebSocket] = {}
@@ -28,7 +28,7 @@ manager = ConnectionManager()
 
 @router.post("/", response_model=ChatResponse)
 async def chat(request: ChatRequest):
-    """Óë AI ÍÅ¶Ó¶Ô»°£¨HTTP£©"""
+    """ä¸ AI å›¢é˜Ÿå¯¹è¯ï¼ˆHTTPï¼‰"""
     project_context = {}
     if request.project_id:
         project_context = {"project_id": request.project_id}
@@ -36,14 +36,14 @@ async def chat(request: ChatRequest):
     result = await orchestrator.chat_with_team(request.message, project_context)
     return ChatResponse(
         response=result["response"],
-        agent_name=result.get("agent", "AI ÍÅ¶Ó"),
+        agent_name=result.get("agent", "AI å›¢é˜Ÿ"),
         actions=result.get("actions")
     )
 
 
 @router.websocket("/ws/{client_id}")
 async def websocket_chat(websocket: WebSocket, client_id: str):
-    """WebSocket ÊµÊ±¶Ô»°"""
+    """WebSocket å®æ—¶å¯¹è¯"""
     await manager.connect(websocket, client_id)
     try:
         while True:
@@ -51,21 +51,21 @@ async def websocket_chat(websocket: WebSocket, client_id: str):
             message = data.get("message", "")
             project_id = data.get("project_id")
 
-            # ·¢ËÍË¼¿¼ÖĞ×´Ì¬
+            # å‘é€æ€è€ƒä¸­çŠ¶æ€
             await manager.send_message(client_id, {
                 "type": "thinking",
-                "content": "AI ÍÅ¶ÓÕıÔÚ·ÖÎö..."
+                "content": "AI å›¢é˜Ÿæ­£åœ¨åˆ†æ..."
             })
 
-            # µ÷ÓÃ AI
+            # è°ƒç”¨ AI
             project_context = {"project_id": project_id} if project_id else {}
             result = await orchestrator.chat_with_team(message, project_context)
 
-            # ·¢ËÍ»Ø¸´
+            # å‘é€å›å¤
             await manager.send_message(client_id, {
                 "type": "message",
                 "content": result["response"],
-                "agent": result.get("agent", "AI ÍÅ¶Ó"),
+                "agent": result.get("agent", "AI å›¢é˜Ÿ"),
                 "timestamp": str(datetime.now()) if 'datetime' in dir() else "2025-01-01"
             })
     except WebSocketDisconnect:

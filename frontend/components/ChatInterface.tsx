@@ -7,7 +7,7 @@ import { sendMessage, ChatMessage } from "@/lib/api";
 
 export default function ChatInterface({ projectId }: { projectId?: number }) {
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: "agent", content: "ÄãºÃ£¡ÎÒÊÇÄãµÄ AI ÍÅ¶ÓĞ­µ÷Ô±¡£Çë¸æËßÎÒÄãµÄÏë·¨£¬ÎÒ»á°²ÅÅºÏÊÊµÄÍÅ¶Ó³ÉÔ±ÎªÄã·şÎñ¡£", agent_name: "AI ÍÅ¶Ó" },
+    { role: "agent", content: "ä½ å¥½ï¼æˆ‘æ˜¯ä½ çš„ AI å›¢é˜Ÿåè°ƒå‘˜ã€‚è¯·å‘Šè¯‰æˆ‘ä½ çš„æƒ³æ³•ï¼Œæˆ‘ä¼šå®‰æ’åˆé€‚çš„å›¢é˜Ÿæˆå‘˜ä¸ºä½ æœåŠ¡ã€‚", agent_name: "AI å›¢é˜Ÿ" },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,12 +33,12 @@ export default function ChatInterface({ projectId }: { projectId?: number }) {
       const res = await sendMessage(userMessage, projectId);
       setMessages((prev) => [
         ...prev,
-        { role: "agent", content: res.response, agent_name: res.agent_name || "AI ÍÅ¶Ó" },
+        { role: "agent", content: res.response, agent_name: res.agent_name || "AI å›¢é˜Ÿ" },
       ]);
     } catch (err) {
       setMessages((prev) => [
         ...prev,
-        { role: "agent", content: "±§Ç¸£¬·şÎñÔİÊ±²»¿ÉÓÃ£¬ÇëÉÔºóÖØÊÔ¡£", agent_name: "ÏµÍ³" },
+        { role: "agent", content: "æŠ±æ­‰ï¼ŒæœåŠ¡æš‚æ—¶ä¸å¯ç”¨ï¼Œè¯·ç¨åé‡è¯•ã€‚", agent_name: "ç³»ç»Ÿ" },
       ]);
     } finally {
       setLoading(false);
@@ -49,7 +49,7 @@ export default function ChatInterface({ projectId }: { projectId?: number }) {
     <div className="glass flex flex-col h-[500px]">
       <div className="p-4 border-b border-white/5 flex items-center gap-2">
         <Sparkles className="w-5 h-5 text-blue-400" />
-        <span className="font-semibold">AI ÍÅ¶Ó¶Ô»°</span>
+        <span className="font-semibold">AI å›¢é˜Ÿå¯¹è¯</span>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -104,7 +104,7 @@ export default function ChatInterface({ projectId }: { projectId?: number }) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSend()}
-            placeholder="ÊäÈëÄãµÄÏë·¨»òÎÊÌâ..."
+            placeholder="è¾“å…¥ä½ çš„æƒ³æ³•æˆ–é—®é¢˜..."
             className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-blue-500/50 transition-colors"
           />
           <button

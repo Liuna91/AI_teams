@@ -1,4 +1,4 @@
-"""MetaGPT ¼¯³É·şÎñ - Ä£Äâ¶à½ÇÉ«Ğ­×÷¿ª·¢Á÷³Ì"""
+"""MetaGPT é›†æˆæœåŠ¡ - æ¨¡æ‹Ÿå¤šè§’è‰²åä½œå¼€å‘æµç¨‹"""
 import os
 import json
 from datetime import datetime
@@ -7,57 +7,57 @@ from app.services.llm_service import chat_completion, structured_output
 
 
 class MetaGPTService:
-    """Ä£Äâ MetaGPT µÄ¶à½ÇÉ«Ğ­×÷¿ª·¢Á÷³Ì"""
+    """æ¨¡æ‹Ÿ MetaGPT çš„å¤šè§’è‰²åä½œå¼€å‘æµç¨‹"""
 
     ROLES = {
         "pm": {
             "name": "Emma",
             "role": "Product Manager",
-            "system_prompt": """ÄãÊÇÒ»Î»×ÊÉî²úÆ·¾­Àí Emma¡£ÄãµÄÖ°ÔğÊÇ½«ÓÃ»§µÄÏë·¨×ª»¯ÎªÇåÎúµÄ²úÆ·ĞèÇóÎÄµµ£¨PRD£©¡£
-ÄãĞèÒª£º
-1. ·ÖÎöÓÃ»§ĞèÇó£¬ÌáÁ¶ºËĞÄ¹¦ÄÜ
-2. ±àĞ´ÏêÏ¸µÄ PRD£¬°üÀ¨¹¦ÄÜÁĞ±í¡¢ÓÃ»§¹ÊÊÂ¡¢ÓÅÏÈ¼¶
-3. ¶¨Òå²úÆ··¶Î§ºÍ MVP ¹¦ÄÜ
-4. Êä³ö½á¹¹»¯µÄĞèÇóÎÄµµ
+            "system_prompt": """ä½ æ˜¯ä¸€ä½èµ„æ·±äº§å“ç»ç† Emmaã€‚ä½ çš„èŒè´£æ˜¯å°†ç”¨æˆ·çš„æƒ³æ³•è½¬åŒ–ä¸ºæ¸…æ™°çš„äº§å“éœ€æ±‚æ–‡æ¡£ï¼ˆPRDï¼‰ã€‚
+ä½ éœ€è¦ï¼š
+1. åˆ†æç”¨æˆ·éœ€æ±‚ï¼Œæç‚¼æ ¸å¿ƒåŠŸèƒ½
+2. ç¼–å†™è¯¦ç»†çš„ PRDï¼ŒåŒ…æ‹¬åŠŸèƒ½åˆ—è¡¨ã€ç”¨æˆ·æ•…äº‹ã€ä¼˜å…ˆçº§
+3. å®šä¹‰äº§å“èŒƒå›´å’Œ MVP åŠŸèƒ½
+4. è¾“å‡ºç»“æ„åŒ–çš„éœ€æ±‚æ–‡æ¡£
 
-ÇëÓÃÖĞÎÄ»Ø¸´¡£"""
+è¯·ç”¨ä¸­æ–‡å›å¤ã€‚"""
         },
         "architect": {
             "name": "Bob",
             "role": "System Architect", 
-            "system_prompt": """ÄãÊÇÒ»Î»ÏµÍ³¼Ü¹¹Ê¦ Bob¡£ÄãµÄÖ°ÔğÊÇÉè¼ÆÏµÍ³À¶Í¼£¬È·±£Ó¦ÓÃ¿ÉÀ©Õ¹¡¢¸ß¿ÉÓÃ¡£
-ÄãĞèÒª£º
-1. ¸ù¾İ PRD Éè¼Æ¼¼Êõ¼Ü¹¹
-2. Ñ¡ÔñºÏÊÊµÄ¼¼ÊõÕ»
-3. Éè¼ÆÊı¾İ¿â½á¹¹
-4. ¶¨Òå API ½Ó¿Ú
-5. Êä³ö¼Ü¹¹Éè¼ÆÎÄµµ
+            "system_prompt": """ä½ æ˜¯ä¸€ä½ç³»ç»Ÿæ¶æ„å¸ˆ Bobã€‚ä½ çš„èŒè´£æ˜¯è®¾è®¡ç³»ç»Ÿè“å›¾ï¼Œç¡®ä¿åº”ç”¨å¯æ‰©å±•ã€é«˜å¯ç”¨ã€‚
+ä½ éœ€è¦ï¼š
+1. æ ¹æ® PRD è®¾è®¡æŠ€æœ¯æ¶æ„
+2. é€‰æ‹©åˆé€‚çš„æŠ€æœ¯æ ˆ
+3. è®¾è®¡æ•°æ®åº“ç»“æ„
+4. å®šä¹‰ API æ¥å£
+5. è¾“å‡ºæ¶æ„è®¾è®¡æ–‡æ¡£
 
-ÇëÓÃÖĞÎÄ»Ø¸´¡£"""
+è¯·ç”¨ä¸­æ–‡å›å¤ã€‚"""
         },
         "engineer": {
             "name": "Alex",
             "role": "Full-Stack Engineer",
-            "system_prompt": """ÄãÊÇÒ»Î»È«Õ»¹¤³ÌÊ¦ Alex¡£ÄãµÄÖ°ÔğÊÇ¹¹½¨Éú²ú¼¶Ó¦ÓÃ¡£
-ÄãĞèÒª£º
-1. ¸ù¾İ¼Ü¹¹Éè¼Æ±àĞ´Ç°ºó¶Ë´úÂë
-2. ÊµÏÖºËĞÄ¹¦ÄÜÄ£¿é
-3. È·±£´úÂëÖÊÁ¿ºÍ¿ÉÎ¬»¤ĞÔ
-4. Êä³ö¿ÉÔËĞĞµÄ´úÂëºÍ²¿ÊğËµÃ÷
+            "system_prompt": """ä½ æ˜¯ä¸€ä½å…¨æ ˆå·¥ç¨‹å¸ˆ Alexã€‚ä½ çš„èŒè´£æ˜¯æ„å»ºç”Ÿäº§çº§åº”ç”¨ã€‚
+ä½ éœ€è¦ï¼š
+1. æ ¹æ®æ¶æ„è®¾è®¡ç¼–å†™å‰åç«¯ä»£ç 
+2. å®ç°æ ¸å¿ƒåŠŸèƒ½æ¨¡å—
+3. ç¡®ä¿ä»£ç è´¨é‡å’Œå¯ç»´æŠ¤æ€§
+4. è¾“å‡ºå¯è¿è¡Œçš„ä»£ç å’Œéƒ¨ç½²è¯´æ˜
 
-ÇëÓÃÖĞÎÄ»Ø¸´£¬´úÂë¿éÊ¹ÓÃ±ê×¼ markdown ¸ñÊ½¡£"""
+è¯·ç”¨ä¸­æ–‡å›å¤ï¼Œä»£ç å—ä½¿ç”¨æ ‡å‡† markdown æ ¼å¼ã€‚"""
         },
         "qa": {
             "name": "QA Team",
             "role": "Quality Assurance",
-            "system_prompt": """ÄãÊÇÒ»Î» QA ¹¤³ÌÊ¦¡£ÄãµÄÖ°ÔğÊÇ²âÊÔÓ¦ÓÃ²¢È·±£ÖÊÁ¿¡£
-ÄãĞèÒª£º
-1. ±àĞ´²âÊÔÓÃÀı
-2. ½øĞĞ¹¦ÄÜ²âÊÔ
-3. ·¢ÏÖÇ±ÔÚÎÊÌâ
-4. Êä³ö²âÊÔ±¨¸æ
+            "system_prompt": """ä½ æ˜¯ä¸€ä½ QA å·¥ç¨‹å¸ˆã€‚ä½ çš„èŒè´£æ˜¯æµ‹è¯•åº”ç”¨å¹¶ç¡®ä¿è´¨é‡ã€‚
+ä½ éœ€è¦ï¼š
+1. ç¼–å†™æµ‹è¯•ç”¨ä¾‹
+2. è¿›è¡ŒåŠŸèƒ½æµ‹è¯•
+3. å‘ç°æ½œåœ¨é—®é¢˜
+4. è¾“å‡ºæµ‹è¯•æŠ¥å‘Š
 
-ÇëÓÃÖĞÎÄ»Ø¸´¡£"""
+è¯·ç”¨ä¸­æ–‡å›å¤ã€‚"""
         }
     }
 
@@ -66,7 +66,7 @@ class MetaGPTService:
         os.makedirs(workspace_dir, exist_ok=True)
 
     async def run_workflow(self, idea: str, project_name: str) -> dict:
-        """ÔËĞĞÍêÕûµÄ MetaGPT ¹¤×÷Á÷"""
+        """è¿è¡Œå®Œæ•´çš„ MetaGPT å·¥ä½œæµ"""
         project_dir = os.path.join(self.workspace_dir, project_name)
         os.makedirs(project_dir, exist_ok=True)
 
@@ -77,43 +77,43 @@ class MetaGPTService:
             "status": "running"
         }
 
-        # Phase 1: PM - ĞèÇó·ÖÎö
+        # Phase 1: PM - éœ€æ±‚åˆ†æ
         prd = await self._run_role("pm", idea, project_dir)
-        results["phases"].append({"phase": "ĞèÇó·ÖÎö", "agent": "Emma", "output": prd})
+        results["phases"].append({"phase": "éœ€æ±‚åˆ†æ", "agent": "Emma", "output": prd})
 
-        # Phase 2: Architect - ¼Ü¹¹Éè¼Æ
+        # Phase 2: Architect - æ¶æ„è®¾è®¡
         arch = await self._run_role("architect", prd, project_dir)
-        results["phases"].append({"phase": "¼Ü¹¹Éè¼Æ", "agent": "Bob", "output": arch})
+        results["phases"].append({"phase": "æ¶æ„è®¾è®¡", "agent": "Bob", "output": arch})
 
-        # Phase 3: Engineer - ´úÂëÊµÏÖ
+        # Phase 3: Engineer - ä»£ç å®ç°
         code = await self._run_role("engineer", arch, project_dir)
-        results["phases"].append({"phase": "´úÂëÊµÏÖ", "agent": "Alex", "output": code})
+        results["phases"].append({"phase": "ä»£ç å®ç°", "agent": "Alex", "output": code})
 
-        # Phase 4: QA - ²âÊÔ
+        # Phase 4: QA - æµ‹è¯•
         test = await self._run_role("qa", code, project_dir)
-        results["phases"].append({"phase": "ÖÊÁ¿²âÊÔ", "agent": "QA Team", "output": test})
+        results["phases"].append({"phase": "è´¨é‡æµ‹è¯•", "agent": "QA Team", "output": test})
 
         results["status"] = "completed"
         results["project_dir"] = project_dir
 
-        # ±£´æÍêÕû±¨¸æ
+        # ä¿å­˜å®Œæ•´æŠ¥å‘Š
         with open(os.path.join(project_dir, "report.json"), "w", encoding="utf-8") as f:
             json.dump(results, f, ensure_ascii=False, indent=2)
 
         return results
 
     async def _run_role(self, role_key: str, input_content: str, project_dir: str) -> str:
-        """ÔËĞĞµ¥¸ö½ÇÉ«"""
+        """è¿è¡Œå•ä¸ªè§’è‰²"""
         role = self.ROLES[role_key]
 
         messages = [
             {"role": "system", "content": role["system_prompt"]},
-            {"role": "user", "content": f"Çë»ùÓÚÒÔÏÂÄÚÈİ½øĞĞ{role['role']}¹¤×÷£º\n\n{input_content}"}
+            {"role": "user", "content": f"è¯·åŸºäºä»¥ä¸‹å†…å®¹è¿›è¡Œ{role['role']}å·¥ä½œï¼š\n\n{input_content}"}
         ]
 
         response = await chat_completion(messages, temperature=0.7)
 
-        # ±£´æ½ÇÉ«Êä³ö
+        # ä¿å­˜è§’è‰²è¾“å‡º
         filename = f"{role_key}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
         with open(os.path.join(project_dir, filename), "w", encoding="utf-8") as f:
             f.write(f"# {role['name']} - {role['role']}\n\n")
@@ -122,18 +122,18 @@ class MetaGPTService:
         return response
 
     async def generate_code(self, requirements: str, tech_stack: str = "nextjs") -> dict:
-        """Ö±½ÓÉú³É´úÂë"""
-        prompt = f"""»ùÓÚÒÔÏÂĞèÇó£¬Éú³ÉÒ»¸öÍêÕûµÄ {tech_stack} ÏîÄ¿´úÂë£º
+        """ç›´æ¥ç”Ÿæˆä»£ç """
+        prompt = f"""åŸºäºä»¥ä¸‹éœ€æ±‚ï¼Œç”Ÿæˆä¸€ä¸ªå®Œæ•´çš„ {tech_stack} é¡¹ç›®ä»£ç ï¼š
 
-ĞèÇó£º
+éœ€æ±‚ï¼š
 {requirements}
 
-ÇëÊä³ö£º
-1. ÏîÄ¿½á¹¹ËµÃ÷
-2. ¹Ø¼üÎÄ¼şµÄÍêÕû´úÂë£¨package.json, Ö÷ÒªÒ³Ãæ, API Â·ÓÉµÈ£©
-3. ²¿ÊğËµÃ÷
+è¯·è¾“å‡ºï¼š
+1. é¡¹ç›®ç»“æ„è¯´æ˜
+2. å…³é”®æ–‡ä»¶çš„å®Œæ•´ä»£ç ï¼ˆpackage.json, ä¸»è¦é¡µé¢, API è·¯ç”±ç­‰ï¼‰
+3. éƒ¨ç½²è¯´æ˜
 
-ÇëÈ·±£´úÂë¿ÉÒÔÖ±½ÓÔËĞĞ¡£"""
+è¯·ç¡®ä¿ä»£ç å¯ä»¥ç›´æ¥è¿è¡Œã€‚"""
 
         messages = [
             {"role": "system", "content": self.ROLES["engineer"]["system_prompt"]},
@@ -144,5 +144,5 @@ class MetaGPTService:
         return {"code": response, "tech_stack": tech_stack}
 
 
-# µ¥Àı
+# å•ä¾‹
 metagpt_service = MetaGPTService()
